@@ -1,0 +1,70 @@
+﻿@model CRUD_EXAMPLE.Models.Student
+
+@{
+    ViewData["Title"] = "Student details";
+}
+
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+        <div class="bg-blue-600 h-40"></div>
+        <div class="px-8 py-6 relative">
+            @if (Model.ImageData != null && Model.ImageData.Length > 0)
+            {
+            <div class="absolute -top-16 left-8">
+                <img class="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
+                     src="data:image/jpeg;base64,@Convert.ToBase64String(Model.ImageData)"
+                     alt="Student Photo" />
+            </div>
+            }
+            <div class="mt-16">
+                <h1 class="text-3xl font-bold text-gray-800">@Model.FirstName @Model.LastName</h1>
+                <p class="text-gray-600 mt-2">
+                    <i class="fas fa-id-card mr-2"></i>
+                    Student ID: @Model.StudentID
+                </p>
+            </div>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex items-center text-gray-700">
+                    <i class="fas fa-phone w-5 h-5 mr-3 text-blue-500"></i>
+                    @Model.Phone
+                </div>
+
+                <div class="flex items-center text-gray-700">
+                    <i class="fas fa-map-marker-alt w-5 h-5 mr-3 text-blue-500"></i>
+                    @Model.Email
+                </div>
+                <div class="flex items-center text-gray-700">
+                    <i class="fas fa-map-marker-alt w-5 h-5 mr-3 text-blue-500"></i>
+                    @Model.Address
+                </div>
+                <div class="flex items-center text-gray-700">
+                    <i class="fas fa-venus-mars w-5 h-5 mr-3 text-blue-500"></i>
+                    @Model.Gender
+                </div>
+                <div class="flex items-center text-gray-700">
+                    <i class="fas fa-birthday-cake w-5 h-5 mr-3 text-blue-500"></i>
+                    @Model.Dob.ToString("MMMM dd, yyyy")
+                </div>
+                <div class="flex items-center text-gray-700">
+                    <i class="fas fa-city w-5 h-5 mr-3 text-blue-500"></i>
+                    @Model.City, @Model.State
+                </div>
+                <div class="flex items-center text-gray-700">
+                    <i class="fas fa-map-pin w-5 h-5 mr-3 text-blue-500"></i>
+                    @Model.Pin
+                </div>
+            </div>
+            @if (Model.PdfData != null)
+            {
+            <div class="mt-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Additional Documents</h2>
+
+                <a href="@Url.Action("GetPdf", new { id = Model.StudentID })" download="student.pdf">Download PDF</a>
+
+                
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
